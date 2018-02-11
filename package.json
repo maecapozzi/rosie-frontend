@@ -21,7 +21,7 @@
     "format": "prettier-standard 'src/**/*.js'"
   },
   "lint-staged": {
-    "*.js": [
+    "{,!(node_modules)/}**/*.{js,jsx}": [
       "prettier-standard",
       "git"
     ]
