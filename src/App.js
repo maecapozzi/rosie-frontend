@@ -1,19 +1,50 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
+import axios from 'axios'
 import './App.css'
 
 class App extends Component {
+  state = {
+    username: '',
+    password: ''
+  }
+  handleSubmit = e => {
+    e.preventDefault()
+    axios
+      .post('http://localhost:3001/createUser', {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
   render () {
     return (
-      <div className='App'>
-        <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <h1 className='App-title'>Welcome to React</h1>
-        </header>
-        <p className='App-intro'>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type='text'
+          name='username'
+          value={this.state.username}
+          placeholder='username'
+          onChange={this.handleChange}
+        />
+        <input
+          type='password'
+          name='password'
+          value={this.state.password}
+          placeholder='password'
+          onChange={this.handleChange}
+        />
+        <input type='submit' />
+      </form>
     )
   }
 }
