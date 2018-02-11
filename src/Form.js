@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
+
+import Input from './Input'
 
 class Form extends Component {
   state = {
@@ -7,32 +10,26 @@ class Form extends Component {
     password: ''
   }
 
+  post = url => {
+    axios
+      .post(url, {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   handleSubmit = e => {
     e.preventDefault()
     if (this.props.type === 'createUser') {
-      axios
-        .post('http://localhost:3001/createUser', {
-          username: this.state.username,
-          password: this.state.password
-        })
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      this.post('http://localhost:3001/createUser')
     } else {
-      axios
-        .post('http://localhost:3001/login', {
-          username: this.state.username,
-          password: this.state.password
-        })
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      this.post('http://localhost:3001/login')
     }
   }
 
@@ -43,24 +40,24 @@ class Form extends Component {
   render () {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input
-          type='text'
-          name='username'
-          value={this.username}
+        <Input
+          value={this.state.username}
+          handleChange={this.handleChange}
           placeholder='username'
-          onChange={this.handleChange}
         />
-        <input
-          type='password'
-          name='password'
-          value={this.password}
+        <Input
+          value={this.state.password}
+          handleChange={this.handleChange}
           placeholder='password'
-          onChange={this.handleChange}
         />
         <input type='submit' />
       </form>
     )
   }
+}
+
+Form.proptypes = {
+  type: PropTypes.string.isRequired
 }
 
 export default Form

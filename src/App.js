@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import Form from './Form'
-import './App.css'
 
-class App extends Component {
-  render () {
-    return (
-      <div>
-        <Form type='createUser' />
-        <Form type='login' />
-      </div>
-    )
-  }
+const App = () => {
+  return (
+    <div>
+      <h1>Register</h1>
+      <Form type='createUser' />
+      <h1>Login</h1>
+      <Form type='login' />
+    </div>
+  )
 }
 
 export default App
