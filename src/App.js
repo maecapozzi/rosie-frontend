@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-import Form from './Form'
+import FormContainer from './FormContainer'
 
 const App = () => {
   return (
     <div>
-      <Form formName='Register' type='createUser' />
-      <Form formName='Login' type='login' />
+      <FormContainer formName='Register' type='createUser' />
+      <FormContainer formName='Login' type='login' />
     </div>
   )
 }
