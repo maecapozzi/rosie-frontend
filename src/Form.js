@@ -11,17 +11,10 @@ class Form extends Component {
   }
 
   post = url => {
-    axios
-      .post(url, {
-        username: this.state.username,
-        password: this.state.password
-      })
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    axios.post(url, {
+      username: this.state.username,
+      password: this.state.password
+    })
   }
 
   handleSubmit = e => {
@@ -39,19 +32,26 @@ class Form extends Component {
 
   render () {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <Input
-          value={this.state.username}
-          handleChange={this.handleChange}
-          placeholder='username'
-        />
-        <Input
-          value={this.state.password}
-          handleChange={this.handleChange}
-          placeholder='password'
-        />
-        <input type='submit' />
-      </form>
+      <div>
+        <h1>{this.props.formName}</h1>
+        <form onSubmit={this.handleSubmit}>
+          <Input
+            type='text'
+            name='username'
+            value={this.state.username}
+            placeholder='username'
+            handleChange={this.handleChange}
+          />
+          <Input
+            type='text'
+            name='password'
+            value={this.state.password}
+            placeholder='password'
+            handleChange={this.handleChange}
+          />
+          <input type='submit' />
+        </form>
+      </div>
     )
   }
 }
