@@ -4,6 +4,9 @@
   "private": true,
   "devDependencies": {
     "axios": "^0.17.1",
+    "babel-cli": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.66.0",
     "react-scripts": "1.1.1"
   },
   "dependencies": {
@@ -19,11 +22,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && babel src/ -d lib/",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "precommit": "lint-staged",
-    "format": "prettier-standard 'src/**/*.js'"
+    "format": "prettier-standard 'src/**/*.js'",
+    "prepublish": "npm run build",
+    "flow": "flow"
   },
   "proxy": "http://localhost:3001",
   "lint-staged": {

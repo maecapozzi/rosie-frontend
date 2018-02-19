@@ -1,11 +1,26 @@
+// @flow
+
 import axios from 'axios'
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React from 'react'
 
 import Form from './Form'
 import SubheaderContainer from './SubheaderContainer'
 
-class FormContainer extends Component {
+type Props = {
+  mainColor: string,
+  backgroundColor: string,
+  fontColor: string
+}
+
+type State = {
+  password: string,
+  selected: boolean,
+  type: string,
+  username: string
+}
+
+class FormContainer extends React.Component<Props, State> {
   state = {
     password: '',
     selected: true,
@@ -13,22 +28,22 @@ class FormContainer extends Component {
     username: ''
   }
 
-  post = url => {
+  post = (url: string) => {
     axios.post(url, {
       username: this.state.username,
       password: this.state.password
     })
   }
 
-  handleClick = e => {
-    if (e.target.id === 'createUser') {
+  handleClick = (e: SyntheticEvent<>) => {
+    if (e.currentTarget.id === 'createUser') {
       this.setState({ type: 'createUser', selected: true })
     } else {
       this.setState({ type: 'login', selected: false })
     }
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e: SyntheticEvent<HTMLInputElement>) => {
     e.preventDefault()
     let uri = 'http://localhost:3001'
     if (this.state.type === 'createUser') {
@@ -38,8 +53,8 @@ class FormContainer extends Component {
     }
   }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
+  handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
+    this.setState({ [e.currentTarget.name]: e.currentTarget.value })
   }
 
   render () {
@@ -55,24 +70,13 @@ class FormContainer extends Component {
           fontColor={this.props.fontColor}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-          mainColor={this.mainColor}
+          mainColor={this.props.mainColor}
           password={this.state.password}
           username={this.state.username}
         />
       </div>
     )
   }
-}
-
-FormContainer.proptypes = {
-  backgroundColor: PropTypes.string.isRequired,
-  fontColor: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequred,
-  mainColor: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  username: PropTypes.isRequired
 }
 
 export default FormContainer
