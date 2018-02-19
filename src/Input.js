@@ -1,22 +1,37 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const Input = ({ value, handleChange, placeholder, name, className }) => {
+import StyledInput from './StyledInput'
+
+const Input = ({
+  backgroundColor,
+  fontColor,
+  handleChange,
+  name,
+  placeholder,
+  type,
+  value
+}) => {
   return (
-    <input
-      className={className}
-      type='text'
+    <StyledInput
+      backgroundColor={backgroundColor}
+      fontColor={fontColor}
       name={name}
-      value={value}
-      placeholder={placeholder}
       onChange={handleChange}
+      placeholder={placeholder}
+      type={type}
+      value={value}
     />
   )
 }
 
 Input.propTypes = {
-  value: PropTypes.string,
-  handleChange: PropTypes.func
+  backgroundColor: PropTypes.string.isRequired,
+  fontColor: PropTypes.string.isRequired,
+  handleChange: PropTypes.func,
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  value: PropTypes.string
 }
 
 export default Input

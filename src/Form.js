@@ -1,34 +1,52 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+
+import Button from './Button'
 import Input from './Input'
 
-const Form = ({ username, password, handleSubmit, handleChange }) => {
+const Form = ({
+  backgroundColor,
+  handleChange,
+  handleSubmit,
+  fontColor,
+  mainColor,
+  password,
+  username
+}) => {
   return (
     <form onSubmit={handleSubmit}>
       <Input
-        type='text'
-        name='username'
-        value={username}
-        placeholder='username'
+        backgroundColor={backgroundColor}
+        fontColor={fontColor}
         handleChange={handleChange}
+        name='username'
+        placeholder='username'
+        type='text'
+        value={username}
       />
       <Input
-        type='text'
-        name='password'
-        value={password}
-        placeholder='password'
+        backgroundColor={backgroundColor}
+        fontColor={fontColor}
         handleChange={handleChange}
+        name='password'
+        placeholder='password'
+        type='password'
+        value={password}
       />
-      <input type='submit' />
+      <Button backgroundColor={mainColor} color={mainColor}>
+        {'Submit'}
+      </Button>
     </form>
   )
 }
 
 Form.proptypes = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
+  backgroundColor: PropTypes.string,
+  fontColor: PropTypes.fontColor,
+  handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired
+  password: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired
 }
 
 export default Form
